@@ -1,18 +1,19 @@
 <script>
+import { RouterLink } from "vue-router";
+
 export default {
   methods: {},
   computed: {},
 };
 </script>
 
-<template id="app">
-  <div>
+<template>
+  <div id="app">
     <nav>
       <ul>
         <li><RouterLink id="home" to="/">Home</RouterLink></li>
-        <li>About us</li>
-        <li>FAQ</li>
-        <li>Contact</li>
+        <li><RouterLink id="home" to="/store">Store</RouterLink></li>
+        <li><RouterLink id="home" to="/basket">Basket</RouterLink></li>
       </ul>
     </nav>
     <RouterView />
@@ -33,6 +34,7 @@ export default {
   background-image: url("./assets/asfalt-light.png");
   height: 100vh;
   width: auto;
+  overflow: hidden;
 }
 footer {
   color: black;

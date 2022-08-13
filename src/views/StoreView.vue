@@ -1,18 +1,26 @@
 <template>
   <div class="container">
-    <h1>This is store page</h1>
+    <Products />
   </div>
 </template>
 
-<script></script>
+<script>
+import Products from "../components/Products.vue";
+
+export default {
+  components: {
+    Products,
+  },
+};
+</script>
 
 <style scoped>
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 10vh;
   color: white;
   height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: c;
 }
 </style>
