@@ -11,9 +11,21 @@ export default {
   <div id="app">
     <nav>
       <ul>
-        <li><RouterLink id="home" to="/">Home</RouterLink></li>
-        <li><RouterLink id="home" to="/store">Store</RouterLink></li>
-        <li><RouterLink id="home" to="/basket">Basket</RouterLink></li>
+        <li><RouterLink class="home" to="/">Home</RouterLink></li>
+        <li>
+          <RouterLink
+            :class="['home', $store.state.currentUser.logged ? '' : 'disabled']"
+            to="/store"
+            >Store</RouterLink
+          >
+        </li>
+        <li>
+          <RouterLink
+            :class="['home', $store.state.currentUser.logged ? '' : 'disabled']"
+            to="/cart"
+            >Cart</RouterLink
+          >
+        </li>
       </ul>
     </nav>
     <RouterView />
@@ -66,8 +78,12 @@ li {
   list-style: none;
   font-size: 1.6rem;
 }
-#home {
+.home {
   text-decoration: none;
   color: black;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
 }
 </style>

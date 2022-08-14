@@ -95,5 +95,6 @@ button {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
+  cursor: pointer;
 }
 </style>
