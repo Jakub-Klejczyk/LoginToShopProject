@@ -37,7 +37,7 @@ export default {
       });
     },
     submit(e) {
-      this.$store.commit("login");
+      this.$store.dispatch("login");
     },
   },
 };
@@ -63,9 +63,5 @@ input {
 .btn {
   margin: 1rem 2rem;
   padding: 0.4rem;
-}
-.disabled {
-  pointer-events: none;
-  opacity: 0.6;
 }
 </style>

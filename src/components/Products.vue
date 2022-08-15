@@ -1,10 +1,11 @@
 <template>
   <div class="products">
-    <div class="product" v-for="(prod, index) in prods" :key="index">
-      <img :src="prod.img" :alt="prod.name" />
+    <div class="product" v-for="(product, index) in prods" :key="index">
+      <img :src="product.img" :alt="product.name" />
       <div class="action">
-        <p>{{ prod.name }}</p>
-        <button>+</button>
+        <p>{{ product.name }}</p>
+        <button @click="$store.commit('addToCart')">+</button>
+        <button>-</button>
       </div>
     </div>
   </div>
@@ -96,5 +97,9 @@ button {
   height: 1.6rem;
   border-radius: 50%;
   cursor: pointer;
+}
+.info {
+  position: absolute;
+  bottom: 12vh;
 }
 </style>
