@@ -79,10 +79,16 @@ export default {
   padding: 2rem;
   color: white;
 }
+.product {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+}
 
 img {
-  width: 100%;
-  height: 160px;
+  width: 80%;
+  max-height: 100px;
 }
 
 .action {

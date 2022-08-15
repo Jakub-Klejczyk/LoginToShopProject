@@ -109,6 +109,8 @@ export default createStore({
       ) {
         state.currentUser.logged = true;
         state.currentUser.loggedUserId = 1;
+        state.currentUser.mail = "";
+        state.currentUser.password = "";
         state.textInfo = "";
       } else {
         state.textInfo = "Invalid e-mail or password";
