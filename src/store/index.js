@@ -83,17 +83,18 @@ export default createStore({
         inStock: false,
       },
     ],
-    shoppingCart: {
-      cartId: 0,
-      userId: 0,
-      userPoints: 100,
-      productsInStock: {
-        id: 0,
-        quantity: 0,
+    shoppingCart: [
+      {
+        products: [
+          {
+            name: "Nike Air Force 1",
+            points: 20,
+          },
+        ],
+        userPoints: 100,
         full: false,
       },
-      totalPrice: 0,
-    },
+    ],
   },
   mutations: {
     updateMail(state, payload) {
@@ -107,25 +108,23 @@ export default createStore({
         state.currentUser.mail === state.users[0].mail &&
         state.currentUser.password === state.users[0].password
       ) {
-        state.currentUser.logged = true;
-        state.currentUser.loggedUserId = 1;
-        state.currentUser.mail = "";
-        state.currentUser.password = "";
+        const { currentUser } = state;
+        currentUser.logged = true;
+        currentUser.loggedUserId = 1;
+        currentUser.mail = "";
+        currentUser.password = "";
         state.textInfo = "";
       } else {
         state.textInfo = "Invalid e-mail or password";
       }
     },
     addToCart(state, payload) {
-      state.shoppingCart.cartId = 1;
-      state.shoppingCart.userId = state.currentUser.loggedUserId;
-      state.shoppingCart.productsInStock.id = 1;
-      state.shoppingCart.productsInStock.quantity += 1;
-      state.shoppingCart.productsInStock.full = true;
+      const { currentUser, users, textInfo, products, shoppingCart } = state;
+      shoppingCart[0].full = true;
     },
   },
   actions: {
-    login(state) {
+    LOGIN_USER(state) {
       setTimeout(() => {
         this.commit("login");
       }, 1000);
@@ -133,7 +132,19 @@ export default createStore({
   },
   getters: {
     totalPrice(state) {
-      return state.shoppingCart.productsInStock.quantity * 20;
+      return state.shoppingCart[0].products[0].points;
+    },
+    displayUserPoints(state) {
+      return state.shoppingCart[0].userPoints;
+    },
+    pointsAfterShopping(state) {
+      return (
+        state.shoppingCart[0].userPoints -
+        state.shoppingCart[0].products[0].points
+      );
+    },
+    productInCart(state) {
+      return state.shoppingCart[0].products[0].name;
     },
   },
 });

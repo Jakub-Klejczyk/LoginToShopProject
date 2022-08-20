@@ -5,17 +5,17 @@
     </h1>
     <div v-else>
       <h2 class="dis">
-        You have {{ $store.state.shoppingCart.userPoints }} ponts for shopping
+        You have {{ $store.getters.displayUserPoints }} points for shopping
       </h2>
       <p class="dis">
-        Product in you basket: {{ $store.state.products[0].name }}
+        Product in you basket: {{ $store.getters.productInCart }}
       </p>
       <p class="dis">
         Total price of your cart is: {{ $store.getters.totalPrice }}.
       </p>
       <p class="dis">
         Your points after shopping:
-        {{ $store.state.shoppingCart.userPoints - $store.getters.totalPrice }}.
+        {{ $store.getters.pointsAfterShopping }}.
       </p>
     </div>
   </div>
@@ -24,6 +24,7 @@
 <script>
 export default {
   data() {},
+
   components: {},
 };
 </script>

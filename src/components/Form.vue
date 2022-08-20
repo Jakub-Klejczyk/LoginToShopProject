@@ -20,10 +20,13 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "Form",
 
   methods: {
+    ...mapActions(["LOGIN_USER"]),
     updateMail(e, type) {
       this.$store.commit("updateMail", {
         value: e.target.value,
@@ -37,7 +40,7 @@ export default {
       });
     },
     submit(e) {
-      this.$store.dispatch("login");
+      this.LOGIN_USER();
     },
   },
 };
