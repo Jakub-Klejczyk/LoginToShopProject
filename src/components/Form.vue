@@ -1,46 +1,34 @@
 <template>
   <form @submit.prevent="submit">
     <label for="">E-mail</label>
-    <input
-      type="email"
-      :value="$store.state.currentUser.mail"
-      @change="updateMail($event, 'mail')"
-    />
+    <input type="email" :value="mail" @input="updateMail($event)" />
 
     <label for="">Password</label>
-    <input
-      type="password"
-      :value="$store.state.currentUser.password"
-      @change="updatePass($event, 'password')"
-    />
+    <input type="password" :value="mail" @input="updatePass($event)" />
 
     <input type="submit" value="Log In" />
-    <p>{{ $store.state.textInfo }}</p>
+    <p>{{ textInfo }}</p>
   </form>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "Form",
-
+  computed: {
+    ...mapState(["textInfo", "currentUser", "log"]),
+  },
   methods: {
-    ...mapActions(["LOGIN_USER"]),
-    updateMail(e, type) {
-      this.$store.commit("updateMail", {
-        value: e.target.value,
-        type,
-      });
+    ...mapActions(["login"]),
+    updateMail(e) {
+      this.$store.dispatch("changeMail", e.target.value);
     },
-    updatePass(e, type) {
-      this.$store.commit("updatePass", {
-        value: e.target.value,
-        type,
-      });
+    updatePass(e) {
+      this.$store.dispatch("changePass", e.target.value);
     },
     submit(e) {
-      this.LOGIN_USER();
+      this.login();
     },
   },
 };

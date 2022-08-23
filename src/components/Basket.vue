@@ -1,30 +1,35 @@
 <template>
   <div class="basket">
-    <h1 v-if="$store.state.shoppingCart.cartId === 0">
+    <h1 v-if="$store.state.shoppingCart[0].full === false">
       There is no products in basket.
     </h1>
     <div v-else>
-      <h2 class="dis">
-        You have {{ $store.getters.displayUserPoints }} points for shopping
-      </h2>
-      <p class="dis">
-        Product in you basket: {{ $store.getters.productInCart }}
-      </p>
-      <p class="dis">
-        Total price of your cart is: {{ $store.getters.totalPrice }}.
-      </p>
+      <h2 class="dis">You have {{ getUserPoints }} points for shopping</h2>
+      <p class="dis">Product in you basket: {{ productInCart }}</p>
+      <p class="dis">Total price of your cart is: {{ totalPrice }}.</p>
       <p class="dis">
         Your points after shopping:
-        {{ $store.getters.pointsAfterShopping }}.
+        {{ pointsAfterShopping }}.
       </p>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  data() {},
+import { mapGetters } from "vuex";
 
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters([
+      "getUserPoints",
+      "productInCart",
+      "totalPrice",
+      "pointsAfterShopping",
+    ]),
+  },
   components: {},
 };
 </script>

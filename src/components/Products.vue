@@ -1,11 +1,16 @@
 <template>
+  <h3>{{ $store.state.cartInfo }}</h3>
   <div class="products">
     <div class="product" v-for="(product, index) in prods" :key="index">
       <img :src="product.img" :alt="product.name" />
       <div class="action">
         <p>{{ product.name }}</p>
-        <button @click="$store.commit('addToCart')">+</button>
-        <button>-</button>
+        <button
+          @click="$store.commit('ADD_TO_CARD', [product.name, product.points])"
+        >
+          +
+        </button>
+        <button @click="$store.commit('DEL_FROM_CARD')">-</button>
       </div>
     </div>
   </div>
@@ -30,38 +35,47 @@ export default {
         {
           name: "Nike Air Force 1",
           img: NikeAirForce1,
+          points: 90,
         },
         {
           name: "Nike Air Max 2021",
           img: NikeAirMax2021,
+          points: 70,
         },
         {
           name: "Nike Air Max 270",
           img: NikeAirMax270,
+          points: 50,
         },
         {
           name: "Nike Air Max 97",
           img: NikeAirMax97,
+          points: 30,
         },
         {
           name: "Nike Air Max Genome",
           img: NikeAirMaxGenome,
+          points: 70,
         },
         {
           name: "Nike Air Presto",
           img: NikeAirPresto,
+          points: 10,
         },
         {
           name: "Nike Air Zoom 37",
           img: NikeAirZoomPegasus37,
+          points: 20,
         },
         {
           name: "Nike And Rtfkt",
           img: NikeAndRtfkt,
+          points: 50,
         },
         {
           name: "Nike Revolution 6",
           img: NikeRevolution6,
+          points: 30,
         },
       ],
     };
@@ -70,6 +84,10 @@ export default {
 </script>
 
 <style scoped>
+h3 {
+  position: absolute;
+  top: 12vh;
+}
 .products {
   max-width: 40rem;
   height: 100%;
