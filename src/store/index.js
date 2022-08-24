@@ -152,6 +152,12 @@ export default createStore({
     changePass(state, pass) {
       this.commit("UPDATE_PASS", pass);
     },
+    addToCart(state, payload) {
+      this.commit("ADD_TO_CARD", payload);
+    },
+    delFromCart(state) {
+      this.commit("DEL_FROM_CARD");
+    },
   },
   getters: {
     totalPrice(state) {

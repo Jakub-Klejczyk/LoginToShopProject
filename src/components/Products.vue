@@ -5,8 +5,10 @@
       <img :src="product.img" :alt="product.name" />
       <div class="action">
         <p>{{ product.name }}</p>
-        <button @click="ADD_TO_CARD([product.name, product.points])">+</button>
-        <button @click="DEL_FROM_CARD()">-</button>
+        <button @click="addToCart2($event, [product.name, product.points])">
+          +
+        </button>
+        <button @click="delFromCart()">-</button>
       </div>
     </div>
   </div>
@@ -23,7 +25,7 @@ import NikeAirZoomPegasus37 from "../assets/products/NikeAirZoomPegasus37.jfif";
 import NikeAndRtfkt from "../assets/products/NikeAndRtfkt.jfif";
 import NikeRevolution6 from "../assets/products/NikeRevolution6.jfif";
 
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "Products",
@@ -79,7 +81,11 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["ADD_TO_CARD", "DEL_FROM_CARD"]),
+    ...mapActions(["addToCart", "delFromCart"]),
+
+    addToCart2(e, payload) {
+      this.addToCart(payload);
+    },
   },
 };
 </script>
