@@ -1,4 +1,4 @@
-# Projekt sklepu interenetowego
+# Projekt sklepu internetowego
 
 Projekt został stworzony w celu nauki Vue3 wraz z Vue Router oraz Vuex.
 
