@@ -10,11 +10,12 @@ export default createStore({
       logged: false,
       loggedUserId: 0,
     },
+
     users: [
       {
         userId: 1,
-        mail: "jebac-pis@pis.pl",
-        password: "JebacPis123",
+        mail: "jan-kowalski@wp.pl",
+        password: "Kowalski123",
       },
     ],
     textInfo: "",
@@ -83,57 +84,99 @@ export default createStore({
         inStock: false,
       },
     ],
-    shoppingCart: {
-      cartId: 0,
-      userId: 0,
-      userPoints: 100,
-      productsInStock: {
-        id: 0,
-        quantity: 0,
+    shoppingCart: [
+      {
+        products: [
+          {
+            name: "",
+            points: 0,
+          },
+        ],
+        userPoints: 100,
         full: false,
       },
-      totalPrice: 0,
-    },
+    ],
+    cartInfo: "You can add only one item.",
   },
   mutations: {
-    updateMail(state, payload) {
-      state.currentUser.mail = payload.value;
+    UPDATE_MAIL(state, mail) {
+      state.currentUser.mail = mail;
     },
-    updatePass(state, payload) {
-      state.currentUser.password = payload.value;
+    UPDATE_PASS(state, pass) {
+      state.currentUser.password = pass;
     },
-    login(state) {
+    LOGIN(state) {
       if (
         state.currentUser.mail === state.users[0].mail &&
         state.currentUser.password === state.users[0].password
       ) {
-        state.currentUser.logged = true;
-        state.currentUser.loggedUserId = 1;
-        state.currentUser.mail = "";
-        state.currentUser.password = "";
+        const { currentUser } = state;
+        currentUser.logged = true;
+        currentUser.loggedUserId = 1;
+        currentUser.mail = "";
+        currentUser.password = "";
         state.textInfo = "";
       } else {
         state.textInfo = "Invalid e-mail or password";
       }
     },
-    addToCart(state, payload) {
-      state.shoppingCart.cartId = 1;
-      state.shoppingCart.userId = state.currentUser.loggedUserId;
-      state.shoppingCart.productsInStock.id = 1;
-      state.shoppingCart.productsInStock.quantity += 1;
-      state.shoppingCart.productsInStock.full = true;
+    ADD_TO_CARD(state, payload) {
+      const { currentUser, users, textInfo, products, shoppingCart } = state;
+      if (shoppingCart[0].full === false) {
+        shoppingCart[0].full = true;
+        shoppingCart[0].products[0].name = payload[0];
+        shoppingCart[0].products[0].points = payload[1];
+      } else {
+        state.cartInfo = "You have already added an item!";
+        setTimeout(() => {
+          state.cartInfo = "You can add only one item.";
+        }, 5000);
+      }
+    },
+    DEL_FROM_CARD(state) {
+      const { currentUser, users, textInfo, products, shoppingCart } = state;
+      shoppingCart[0].full = false;
+      shoppingCart[0].products[0].name = "";
+      shoppingCart[0].products[0].points = 0;
     },
   },
   actions: {
     login(state) {
       setTimeout(() => {
-        this.commit("login");
+        this.commit("LOGIN");
       }, 1000);
+    },
+    changeMail(state, mail) {
+      this.commit("UPDATE_MAIL", mail);
+    },
+    changePass(state, pass) {
+      this.commit("UPDATE_PASS", pass);
+    },
+    addToCart(state, payload) {
+      this.commit("ADD_TO_CARD", payload);
+    },
+    delFromCart(state) {
+      this.commit("DEL_FROM_CARD");
     },
   },
   getters: {
     totalPrice(state) {
-      return state.shoppingCart.productsInStock.quantity * 20;
+      return state.shoppingCart[0].products[0].points;
+    },
+    getUserPoints(state) {
+      return state.shoppingCart[0].userPoints;
+    },
+    pointsAfterShopping(state) {
+      return (
+        state.shoppingCart[0].userPoints -
+        state.shoppingCart[0].products[0].points
+      );
+    },
+    productInCart(state) {
+      return state.shoppingCart[0].products[0].name;
+    },
+    emptyCart(state) {
+      return state.shoppingCart[0].full;
     },
   },
 });

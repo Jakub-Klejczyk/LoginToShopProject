@@ -1,29 +1,32 @@
-# vue-project
+# Projekt sklepu internetowego
 
-This template should help get you started developing with Vue 3 in Vite.
+Projekt został stworzony w celu nauki Vue3 wraz z Vue Router oraz Vuex.
 
-## Recommended IDE Setup
+## Funkcjonalności projektu
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Użytkownik witryny ma możliwość:
 
-## Customize configuration
+- zalogować się do sklepu,
+- dodać produkt do koszyka (jeden),
+- usunać produkt z koszyka,
+- podejrzeć zawartość koszyka.
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Obsługa projektu
 
-## Project Setup
+W celu otworzenia projektu należy:
+
+- pobrać zawartość repozytorium,
+- wpisać w konsoli:
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
-
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+- przejść pod adres url wskazany w konsoli
 
-```sh
-npm run build
-```
+LOGIN: jan-kowalski@wp.pl
+HASŁO: Kowalski123
