@@ -5,12 +5,8 @@
       <img :src="product.img" :alt="product.name" />
       <div class="action">
         <p>{{ product.name }}</p>
-        <button
-          @click="$store.commit('ADD_TO_CARD', [product.name, product.points])"
-        >
-          +
-        </button>
-        <button @click="$store.commit('DEL_FROM_CARD')">-</button>
+        <button @click="ADD_TO_CARD([product.name, product.points])">+</button>
+        <button @click="DEL_FROM_CARD()">-</button>
       </div>
     </div>
   </div>
@@ -26,6 +22,8 @@ import NikeAirPresto from "../assets/products/NikeAirPresto.jfif";
 import NikeAirZoomPegasus37 from "../assets/products/NikeAirZoomPegasus37.jfif";
 import NikeAndRtfkt from "../assets/products/NikeAndRtfkt.jfif";
 import NikeRevolution6 from "../assets/products/NikeRevolution6.jfif";
+
+import { mapMutations } from "vuex";
 
 export default {
   name: "Products",
@@ -79,6 +77,9 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    ...mapMutations(["ADD_TO_CARD", "DEL_FROM_CARD"]),
   },
 };
 </script>

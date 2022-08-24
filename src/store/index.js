@@ -14,8 +14,8 @@ export default createStore({
     users: [
       {
         userId: 1,
-        mail: "jebac-pis@pis.pl",
-        password: "JebacPis123",
+        mail: "jan-kowalski@wp.pl",
+        password: "Kowalski123",
       },
     ],
     textInfo: "",
@@ -168,6 +168,9 @@ export default createStore({
     },
     productInCart(state) {
       return state.shoppingCart[0].products[0].name;
+    },
+    emptyCart(state) {
+      return state.shoppingCart[0].full;
     },
   },
 });

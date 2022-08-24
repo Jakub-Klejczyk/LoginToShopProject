@@ -1,8 +1,6 @@
 <template>
   <div class="basket">
-    <h1 v-if="$store.state.shoppingCart[0].full === false">
-      There is no products in basket.
-    </h1>
+    <h1 v-if="emptyCart === false">There is no products in basket.</h1>
     <div v-else>
       <h2 class="dis">You have {{ getUserPoints }} points for shopping</h2>
       <p class="dis">Product in you basket: {{ productInCart }}</p>
@@ -28,6 +26,7 @@ export default {
       "productInCart",
       "totalPrice",
       "pointsAfterShopping",
+      "emptyCart",
     ]),
   },
   components: {},

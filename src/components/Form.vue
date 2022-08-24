@@ -20,12 +20,12 @@ export default {
     ...mapState(["textInfo", "currentUser", "log"]),
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["login", "changeMail", "changePass"]),
     updateMail(e) {
-      this.$store.dispatch("changeMail", e.target.value);
+      this.changeMail(e.target.value);
     },
     updatePass(e) {
-      this.$store.dispatch("changePass", e.target.value);
+      this.changePass(e.target.value);
     },
     submit(e) {
       this.login();
