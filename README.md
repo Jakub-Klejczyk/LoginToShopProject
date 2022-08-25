@@ -28,5 +28,12 @@ npm run dev
 
 - przejść pod adres url wskazany w konsoli
 
-LOGIN: jan-kowalski@wp.pl
-HASŁO: Kowalski123
+User1:
+
+- LOGIN: jan-kowalski@wp.pl
+- HASŁO: Kowalski123
+
+User2:
+
+- LOGIN: janusz-nowak@wp.pl
+- HASŁO: Janusz123

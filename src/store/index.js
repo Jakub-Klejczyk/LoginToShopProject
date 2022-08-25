@@ -17,6 +17,11 @@ export default createStore({
         mail: "jan-kowalski@wp.pl",
         password: "Kowalski123",
       },
+      {
+        userId: 2,
+        mail: "janusz-nowak@wp.pl",
+        password: "Janusz123",
+      },
     ],
     textInfo: "",
     products: [
@@ -106,20 +111,40 @@ export default createStore({
       state.currentUser.password = pass;
     },
     LOGIN(state) {
-      if (
-        state.currentUser.mail === state.users[0].mail &&
-        state.currentUser.password === state.users[0].password
-      ) {
-        const { currentUser } = state;
-        currentUser.logged = true;
-        currentUser.loggedUserId = 1;
-        currentUser.mail = "";
-        currentUser.password = "";
-        state.textInfo = "";
-      } else {
-        state.textInfo = "Invalid e-mail or password";
-      }
+      state.users.forEach((user) => {
+        let i = false;
+        if (
+          state.currentUser.mail === user.mail &&
+          state.currentUser.password === user.password
+        ) {
+          const { currentUser } = state;
+          currentUser.logged = true;
+          currentUser.loggedUserId = user.userId;
+          currentUser.mail = "";
+          currentUser.password = "";
+          state.textInfo = "";
+          i = true;
+        }
+        if (!i) {
+          state.textInfo = "Invalid e-mail or password";
+        }
+      });
     },
+
+    // if (
+    //   state.currentUser.mail === state.users[i].mail &&
+    //   state.currentUser.password === state.users[i].password
+    // ) {
+    //   const { currentUser } = state;
+    //   currentUser.logged = true;
+    //   currentUser.loggedUserId = 1;
+    //   currentUser.mail = "";
+    //   currentUser.password = "";
+    //   state.textInfo = "";
+    // } else {
+    //   state.textInfo = "Invalid e-mail or password";
+    // }
+
     ADD_TO_CARD(state, payload) {
       const { currentUser, users, textInfo, products, shoppingCart } = state;
       if (shoppingCart[0].full === false) {

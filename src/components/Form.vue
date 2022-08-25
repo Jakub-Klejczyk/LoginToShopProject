@@ -1,10 +1,10 @@
 <template>
   <form @submit.prevent="submit">
     <label for="">E-mail</label>
-    <input type="email" :value="mail" @input="updateMail($event)" />
+    <input type="email" :value="mail" @change="updateMail($event)" />
 
     <label for="">Password</label>
-    <input type="password" :value="mail" @input="updatePass($event)" />
+    <input type="password" :value="mail" @change="updatePass($event)" />
 
     <input type="submit" value="Log In" />
     <p>{{ textInfo }}</p>
