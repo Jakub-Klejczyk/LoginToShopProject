@@ -130,21 +130,6 @@ export default createStore({
         state.textInfo = "Invalid e-mail or password";
       }
     },
-
-    // if (
-    //   state.currentUser.mail === state.users[i].mail &&
-    //   state.currentUser.password === state.users[i].password
-    // ) {
-    //   const { currentUser } = state;
-    //   currentUser.logged = true;
-    //   currentUser.loggedUserId = 1;
-    //   currentUser.mail = "";
-    //   currentUser.password = "";
-    //   state.textInfo = "";
-    // } else {
-    //   state.textInfo = "Invalid e-mail or password";
-    // }
-
     ADD_TO_CARD(state, payload) {
       const { currentUser, users, textInfo, products, shoppingCart } = state;
       if (shoppingCart[0].full === false) {
