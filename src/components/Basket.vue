@@ -9,7 +9,10 @@
         Your points after shopping:
         {{ pointsAfterShopping }}.
       </p>
-      <button :class="['button', pointsAfterShopping <= 0 ? 'disabled' : '']">
+      <button
+        :class="['button', pointsAfterShopping <= 0 ? 'disabled' : '']"
+        @click="setAlert"
+      >
         Buy
       </button>
     </div>
@@ -31,6 +34,11 @@ export default {
       "pointsAfterShopping",
       "emptyCart",
     ]),
+  },
+  methods: {
+    setAlert() {
+      alert("Thanks for your order!");
+    },
   },
   components: {},
 };
