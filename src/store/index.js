@@ -29,64 +29,46 @@ export default createStore({
         id: 1,
         name: "Nike Air Force 1",
         img: "NikeAirForce1",
-        price: 20,
-        inStock: false,
       },
       {
         id: 2,
         name: "Nike Air Max 2021",
         img: "NikeAirMax2021",
-        price: 20,
-        inStock: false,
       },
       {
         id: 3,
         name: "Nike Air Max 270",
         img: "NikeAirMax270",
-        price: 20,
-        inStock: false,
       },
       {
         id: 4,
         name: "Nike Air Max 97",
         img: "NikeAirMax97",
-        price: 20,
-        inStock: false,
       },
       {
         id: 5,
         name: "Nike Air Max Genome",
         img: "NikeAirMaxGenome",
-        price: 20,
-        inStock: false,
       },
       {
         id: 6,
         name: "Nike Air Presto",
         img: "NikeAirPresto",
-        price: 20,
-        inStock: false,
       },
       {
         id: 7,
         name: "Nike Air Zoom 37",
         img: "NikeAirZoomPegasus37",
-        price: 20,
-        inStock: false,
       },
       {
         id: 8,
         name: "Nike And Rtfkt",
         img: "NikeAndRtfkt",
-        price: 20,
-        inStock: false,
       },
       {
         id: 9,
         name: "Nike Revolution 6",
         img: "NikeRevolution6",
-        price: 20,
-        inStock: false,
       },
     ],
     shoppingCart: [
@@ -99,9 +81,10 @@ export default createStore({
         ],
         userPoints: 100,
         full: false,
+        productsInCart: 0,
+        totalPrice: 0,
       },
     ],
-    cartInfo: "You can add only one item.",
   },
   mutations: {
     UPDATE_MAIL(state, mail) {
@@ -132,22 +115,32 @@ export default createStore({
     },
     ADD_TO_CARD(state, payload) {
       const { currentUser, users, textInfo, products, shoppingCart } = state;
-      if (shoppingCart[0].full === false) {
-        shoppingCart[0].full = true;
-        shoppingCart[0].products[0].name = payload[0];
-        shoppingCart[0].products[0].points = payload[1];
-      } else {
-        state.cartInfo = "You have already added an item!";
-        setTimeout(() => {
-          state.cartInfo = "You can add only one item.";
-        }, 5000);
-      }
+      shoppingCart[0].full = true;
+      shoppingCart[0].products[shoppingCart[0].productsInCart].name =
+        payload[0];
+      shoppingCart[0].products[shoppingCart[0].productsInCart].points =
+        payload[1];
+      shoppingCart[0].productsInCart += 1;
+      shoppingCart[0].totalPrice += payload[1];
+
+      const newProd = {
+        name: "",
+        points: 0,
+      };
+      shoppingCart[0].products.push(newProd);
     },
-    DEL_FROM_CARD(state) {
+    DEL_FROM_CARD(state, payload) {
       const { currentUser, users, textInfo, products, shoppingCart } = state;
-      shoppingCart[0].full = false;
-      shoppingCart[0].products[0].name = "";
-      shoppingCart[0].products[0].points = 0;
+      shoppingCart[0].productsInCart -= 1;
+      if (shoppingCart[0].productsInCart <= 0) {
+        shoppingCart[0].full = false;
+      }
+      shoppingCart[0].totalPrice -= payload[1];
+      state.shoppingCart[0].products.forEach((product) => {
+        if (product.name === payload[0]) {
+          state.shoppingCart[0].products.splice(0, 1);
+        }
+      });
     },
   },
   actions: {
@@ -165,25 +158,28 @@ export default createStore({
     addToCart(state, payload) {
       this.commit("ADD_TO_CARD", payload);
     },
-    delFromCart(state) {
-      this.commit("DEL_FROM_CARD");
+    delFromCart(state, payload) {
+      this.commit("DEL_FROM_CARD", payload);
     },
   },
   getters: {
     totalPrice(state) {
-      return state.shoppingCart[0].products[0].points;
+      return state.shoppingCart[0].totalPrice;
     },
     getUserPoints(state) {
       return state.shoppingCart[0].userPoints;
     },
     pointsAfterShopping(state) {
       return (
-        state.shoppingCart[0].userPoints -
-        state.shoppingCart[0].products[0].points
+        state.shoppingCart[0].userPoints - state.shoppingCart[0].totalPrice
       );
     },
     productInCart(state) {
-      return state.shoppingCart[0].products[0].name;
+      const prods = [];
+      for (let i = 0; i < state.shoppingCart[0].products.length; i++) {
+        prods.push(state.shoppingCart[0].products[i].name);
+      }
+      return prods.join(", ").slice(0, -2);
     },
     emptyCart(state) {
       return state.shoppingCart[0].full;

@@ -9,6 +9,9 @@
         Your points after shopping:
         {{ pointsAfterShopping }}.
       </p>
+      <button :class="['button', pointsAfterShopping <= 0 ? 'disabled' : '']">
+        Buy
+      </button>
     </div>
   </div>
 </template>
@@ -36,16 +39,17 @@ export default {
 <style scoped>
 .basket {
   height: 80vh;
-  width: 100vw;
-  margin-block: 10vh;
+  width: 60vh;
+  margin: 10vh auto;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .dis {
+  width: 22rem;
   padding-block: 2rem;
-  transform: scale(2);
+  transform: scale(1.8);
   text-align: center;
 }
 .disabled {
@@ -54,5 +58,10 @@ export default {
 }
 .button {
   cursor: pointer;
+  position: absolute;
+  bottom: 20vh;
+  left: 50vw;
+  transform: translateX(-50%);
+  padding: 0.6rem 2rem;
 }
 </style>
