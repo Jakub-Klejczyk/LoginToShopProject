@@ -111,8 +111,8 @@ export default createStore({
       state.currentUser.password = pass;
     },
     LOGIN(state) {
+      let i = false;
       state.users.forEach((user) => {
-        let i = false;
         if (
           state.currentUser.mail === user.mail &&
           state.currentUser.password === user.password
@@ -125,10 +125,10 @@ export default createStore({
           state.textInfo = "";
           i = true;
         }
-        if (!i) {
-          state.textInfo = "Invalid e-mail or password";
-        }
       });
+      if (!i) {
+        state.textInfo = "Invalid e-mail or password";
+      }
     },
 
     // if (

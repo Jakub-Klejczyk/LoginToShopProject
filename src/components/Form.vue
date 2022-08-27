@@ -1,10 +1,15 @@
 <template>
   <form @submit.prevent="submit">
     <label for="">E-mail</label>
-    <input type="email" :value="mail" @change="updateMail($event)" />
+    <input id="email" type="email" :value="mail" @change="updateMail($event)" />
 
     <label for="">Password</label>
-    <input type="password" :value="mail" @change="updatePass($event)" />
+    <input
+      id="pass"
+      type="password"
+      :value="mail"
+      @change="updatePass($event)"
+    />
 
     <input type="submit" value="Log In" />
     <p>{{ textInfo }}</p>
@@ -29,6 +34,10 @@ export default {
     },
     submit(e) {
       this.login();
+      const email = document.querySelector("#email");
+      const pass = document.querySelector("#pass");
+      email.value = "";
+      pass.value = "";
     },
   },
 };
