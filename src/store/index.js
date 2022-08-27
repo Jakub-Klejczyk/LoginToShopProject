@@ -131,14 +131,15 @@ export default createStore({
     },
     DEL_FROM_CARD(state, payload) {
       const { currentUser, users, textInfo, products, shoppingCart } = state;
-      shoppingCart[0].productsInCart -= 1;
-      if (shoppingCart[0].productsInCart <= 0) {
-        shoppingCart[0].full = false;
-      }
-      shoppingCart[0].totalPrice -= payload[1];
+
       state.shoppingCart[0].products.forEach((product) => {
         if (product.name === payload[0]) {
           state.shoppingCart[0].products.splice(0, 1);
+          shoppingCart[0].productsInCart -= 1;
+          if (shoppingCart[0].productsInCart <= 0) {
+            shoppingCart[0].full = false;
+          }
+          shoppingCart[0].totalPrice -= payload[1];
         }
       });
     },
