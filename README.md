@@ -7,7 +7,7 @@ Projekt został stworzony w celu nauki Vue3 wraz z Vue Router oraz Vuex.
 Użytkownik witryny ma możliwość:
 
 - zalogować się do sklepu,
-- dodać produkt do koszyka (jeden),
+- dodać wiele produktów do koszyka,
 - usunać produkt z koszyka,
 - podejrzeć zawartość koszyka.
 

@@ -1,5 +1,4 @@
 <template>
-  <h3>{{ $store.state.cartInfo }}</h3>
   <div class="products">
     <div class="product" v-for="(product, index) in prods" :key="index">
       <img :src="product.img" :alt="product.name" />
@@ -8,7 +7,9 @@
         <button @click="addToCart2($event, [product.name, product.points])">
           +
         </button>
-        <button @click="delFromCart()">-</button>
+        <button @click="delFromCart2($event, [product.name, product.points])">
+          -
+        </button>
       </div>
     </div>
   </div>
@@ -35,17 +36,17 @@ export default {
         {
           name: "Nike Air Force 1",
           img: NikeAirForce1,
-          points: 90,
+          points: 50,
         },
         {
           name: "Nike Air Max 2021",
           img: NikeAirMax2021,
-          points: 70,
+          points: 40,
         },
         {
           name: "Nike Air Max 270",
           img: NikeAirMax270,
-          points: 50,
+          points: 20,
         },
         {
           name: "Nike Air Max 97",
@@ -55,7 +56,7 @@ export default {
         {
           name: "Nike Air Max Genome",
           img: NikeAirMaxGenome,
-          points: 70,
+          points: 50,
         },
         {
           name: "Nike Air Presto",
@@ -85,6 +86,9 @@ export default {
 
     addToCart2(e, payload) {
       this.addToCart(payload);
+    },
+    delFromCart2(e, payload) {
+      this.delFromCart(payload);
     },
   },
 };

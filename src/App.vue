@@ -1,9 +1,12 @@
 <script>
 import { RouterLink } from "vue-router";
+import { mapState } from "vuex";
 
 export default {
   methods: {},
-  computed: {},
+  computed: {
+    ...mapState(["currentUser"]),
+  },
 };
 </script>
 
@@ -14,14 +17,14 @@ export default {
         <li><RouterLink class="home" to="/">Home</RouterLink></li>
         <li>
           <RouterLink
-            :class="['home', $store.state.currentUser.logged ? '' : 'disabled']"
+            :class="['home', currentUser.logged ? '' : 'disabled']"
             to="/store"
             >Store</RouterLink
           >
         </li>
         <li>
           <RouterLink
-            :class="['home', $store.state.currentUser.logged ? '' : 'disabled']"
+            :class="['home', currentUser.logged ? '' : 'disabled']"
             to="/cart"
             >Cart</RouterLink
           >
